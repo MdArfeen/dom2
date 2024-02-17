@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .score-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .score-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .score-buttons button {
+            width: 30%;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .enter-button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .min-max-box {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Leaderboard</h1>
+        <div class="score-box" id="scoreBox"></div>
+        <div class="score-buttons">
+            <button onclick="appendToScore(1)">1</button>
+            <button onclick="appendToScore(2)">2</button>
+            <button onclick="appendToScore(3)">3</button>
+        </div>
+        <div class="score-buttons">
+            <button onclick="appendToScore(4)">4</button>
+            <button onclick="appendToScore(5)">5</button>
+            <button onclick="appendToScore(6)">6</button>
+        </div>
+        <div class="score-buttons">
+            <button onclick="appendToScore(7)">7</button>
+            <button onclick="appendToScore(8)">8</button>
+            <button onclick="appendToScore(9)">9</button>
+        </div>
+        <button onclick="enterScore()" class="enter-button">ENTER</button>
+        <div class="min-max-box">
+            <div><button>MIN: <span id="minScore">-</span></button></div>
+            <div><button>MAX: <span id="maxScore">-</span></button></div>
+        </div>
+    </div>
+
+    <script>
+        let currentScore = '';
+
+        function appendToScore(number) {
+            currentScore += number;
+            document.getElementById('scoreBox').innerText = currentScore;
+        }
+
+        function enterScore() {
+            if (currentScore !== '') {
+                let score = parseInt(currentScore);
+                let min = parseInt(document.getElementById('minScore').innerText);
+                let max = parseInt(document.getElementById('maxScore').innerText);
+
+                if (isNaN(min) || score < min) {
+                    document.getElementById('minScore').innerText = score;
+                }
+                if (isNaN(max) || score > max) {
+                    document.getElementById('maxScore').innerText = score;
+                }
+
+                currentScore = '';
+                document.getElementById('scoreBox').innerText = '';
+            }
+        }
+    </script>
+</body>
+
+</html>
